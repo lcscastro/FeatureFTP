@@ -29,10 +29,10 @@ class acessoFtp extends \CI_Controller
     }
 
     function download(){
-        // Define variáveis para o recebimento de arquivo
-        $local_arquivo = '/Downloads'; // Localização (local)
-        $ftp_pasta = 'public_html'; // Pasta (externa)
-        $ftp_arquivo = '/logoTeste.png'; // Nome do arquivo (externo)
+        // Define variáveis para o recebimento de arquivo php://temp
+        $arquivo_local = 'php://temp'; // Localização (local)
+        $arquivo_remoto = './public_html/logoTeste.png'; // Pasta (externa)
+        $ftp_arquivo = ''; // Nome do arquivo (externo)
 
 
         echo "<br />Connecting via FTP...";
@@ -56,17 +56,19 @@ class acessoFtp extends \CI_Controller
             echo "<br>$file";
         }*/
 
+        $handle = fopen($arquivo_local, 'r'); //Problema no Diretorio
+
        // Recebe o arquivo pelo FTP (FTP_ASCII(Text) e FTP_BINARY(Img))
-        
-        if( ftp_get($ftp,$local_arquivo,$ftp_pasta.$ftp_arquivo, FTP_BINARY)){
-            echo "\nSalvo com sucesso em $local_arquivo\n";
+
+        if( ftp_fget($ftp,$handle,$arquivo_remoto,FTP_BINARY, 0)){
+            echo "\nSalvo com sucesso\n";
         }
         else {
             echo "Erro no Download\n";
         }
-
         // Encerra a conexão ftp
         ftp_close($ftp);
+//        fclose($handle);
 
     }
 

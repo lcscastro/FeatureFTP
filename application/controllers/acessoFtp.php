@@ -28,7 +28,46 @@ class acessoFtp extends \CI_Controller
 
     }
 
-    function download(){
+
+    function baixar(){
+        $this->load->helper('download');
+        $config['hostname'] = '186.202.119.200';
+        $config['username'] = 'comti';
+        $config['password'] = 'Com@ti0615';
+        $config['passive']  = TRUE;
+        $config['debug']        = TRUE;
+
+        $arquivo_local = dirname(__FILE__) . '\assets\\';
+
+        echo "<br />Connecting via FTP...";
+        if( $this->ftp->connect($config)){
+            echo "<br />Login Ok.<br />";
+        }
+        else {
+            echo "<br />Falha no Login.<br />";
+        }
+
+        echo " Lista de Arquivos:";
+        $list = $this->ftp->list_files('./public_html/');
+
+        foreach ($list as $file)
+        {
+            echo "<br>$file";
+        }
+
+        //download($remotepath, $localpath[, $mode = 'auto'])
+        if ($this->ftp->download('./public_html/logoTeste.png', $arquivo_local, 'auto')){
+            echo "<br>Salvo com sucesso";
+        }else {
+            echo "<br>Erro no Download\n";
+        }
+
+        $this->ftp->close();
+
+    }
+
+
+    function download1(){
         // Define variáveis para o recebimento de arquivo php://temp
         $arquivo_local = 'php://temp'; // Localização (local)
         $arquivo_remoto = './public_html/logoTeste.png'; // Pasta (externa)

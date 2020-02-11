@@ -12,102 +12,52 @@ class acessoFtp extends \CI_Controller
     public function _construct()
     {
         parent::__construct();
+        $this->conectar();
     }
 
     public function index()
     {
-        $this->load->view('teste');
+        $this->load->view('baixar');
     }
-    public function login()
+    public function conectar()
     {
-        $ftp = ftp_connect('186.202.119.200'); //Retorna: True ou false  - Abrindo Conexão com Servidor FTP
-        $login = ftp_login($ftp, 'comti' ,'Com@ti0615');
-    }
-
-    function listar(){
-
-    }
-
-
-    function baixar(){
-        $this->load->helper('download');
         $config['hostname'] = '186.202.119.200';
         $config['username'] = 'comti';
         $config['password'] = 'Com@ti0615';
         $config['passive']  = TRUE;
-        $config['debug']        = TRUE;
+        $config['debug'] = TRUE;
+        $config['port'] = 21;
 
-        $arquivo_local = dirname(__FILE__) . '\assets\\';
-
-        echo "<br />Connecting via FTP...";
         if( $this->ftp->connect($config)){
-            echo "<br />Login Ok.<br />";
+            echo "<br />Login no servidor realizado.<br />";
         }
         else {
             echo "<br />Falha no Login.<br />";
         }
+    }
 
+    function listar(){
+        $pasta_remoto = './httpdocs/hidro';
         echo " Lista de Arquivos:";
-        $list = $this->ftp->list_files('./public_html/');
+        $list = $this->ftp->list_files($pasta_remoto);
 
         foreach ($list as $file)
         {
             echo "<br>$file";
         }
-
-        //download($remotepath, $localpath[, $mode = 'auto'])
-        if ($this->ftp->download('./public_html/logoTeste.png', $arquivo_local, 'auto')){
-            echo "<br>Salvo com sucesso";
-        }else {
-            echo "<br>Erro no Download\n";
-        }
-
         $this->ftp->close();
-
     }
 
+    function baixar(){
 
-    function download1(){
-        // Define variáveis para o recebimento de arquivo php://temp
-        $arquivo_local = 'php://temp'; // Localização (local)
-        $arquivo_remoto = './public_html/logoTeste.png'; // Pasta (externa)
-        $ftp_arquivo = ''; // Nome do arquivo (externo)
+        $arquivo_remoto =  './httpdocs/hidro/hidro.png'; // Pasta (externa)
+        $arquivo_local = './assets/teste.png';
 
-
-        echo "<br />Connecting via FTP...";
-        $ftp = ftp_connect('186.202.119.200'); //Retorna: True ou false  - Abrindo Conexão com Servidor FTP
-        $login = ftp_login($ftp, 'comti' ,'Com@ti0615');
-
-        //Enable PASV ( Note: must be done after ftp_login() )
-        $mode = ftp_pasv($ftp, TRUE);
-
-        //Login OK ?
-        if ((!$ftp) || (!$login) || (!$mode)) {
-            die("Conexão com FTP Falhou !");
-        }
-        echo "<br />Login Ok.<br />";
-
-        //Lista Arquivos da Pasta()
-/*
-        $file_list = ftp_nlist($ftp, $ftp_pasta);
-        foreach ($file_list as $file)
-        {
-            echo "<br>$file";
-        }*/
-
-        $handle = fopen($arquivo_local, 'r'); //Problema no Diretorio
-
-       // Recebe o arquivo pelo FTP (FTP_ASCII(Text) e FTP_BINARY(Img))
-
-        if( ftp_fget($ftp,$handle,$arquivo_remoto,FTP_BINARY, 0)){
-            echo "\nSalvo com sucesso\n";
-        }
-        else {
-            echo "Erro no Download\n";
-        }
-        // Encerra a conexão ftp
-        ftp_close($ftp);
-//        fclose($handle);
+        $this->ftp->download($arquivo_remoto, $arquivo_local, 'auto');
+        //Força Download - Arquivo Dentro do Servidor Local
+        force_download($arquivo_local, null);
+        unlink($arquivo_local);
+        $this->ftp->close();
 
     }
 

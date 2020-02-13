@@ -7,7 +7,9 @@
 <div class="container">
 
         <h1>Download FTP</h1>
+
         <?php
+
         echo form_open("download");
 
         echo form_button(array(

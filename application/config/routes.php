@@ -50,6 +50,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['download'] = 'acessoFtp/baixar';
+$route['lista'] = 'acessoFtp/lista';
+$route['registro'] = 'acessoFTP/registro';
 $route['default_controller'] = 'acessoFtp/index';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

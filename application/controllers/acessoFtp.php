@@ -17,8 +17,9 @@ class acessoFtp extends \CI_Controller
 
     public function index()
     {
-        $this->load->view('baixar');
+        $this->load->view('login');
     }
+
     public function conectar()
     {
         $config['hostname'] = '186.202.119.200';
@@ -36,20 +37,23 @@ class acessoFtp extends \CI_Controller
         }
     }
 
-    function listar(){
-        $pasta_remoto = './httpdocs/hidro';
-        echo " Lista de Arquivos:";
-        $list = $this->ftp->list_files($pasta_remoto);
+    public function lista(){
+        //Mandar Arquivo remoto da lista para função baixar
+        $this->load->view('lista');
 
-        foreach ($list as $file)
-        {
-            echo "<br>$file";
-        }
-        $this->ftp->close();
+//        $pasta_remoto = './httpdocs/hidro';
+//        echo " Lista de Arquivos:";
+//        $list = $this->ftp->list_files($pasta_remoto);
+//
+//        foreach ($list as $file)
+//        {
+//            echo "<br>$file";
+//        }
+//        $this->ftp->close();
     }
 
-    function baixar(){
-
+    public function baixar(){
+        //Trazer Arquivo Remoto pela lista de arquivos
         $arquivo_remoto =  './httpdocs/hidro/hidro.png'; // Pasta (externa)
         $arquivo_local = './assets/teste.png';
 
@@ -61,7 +65,7 @@ class acessoFtp extends \CI_Controller
 
     }
 
-    function upload(){
+    public function upload(){
 
 /*        Define variáveis para o envio de arquivo
     $local_arquivo = './arquivos/documento.doc'; // Localização (local)
@@ -73,5 +77,8 @@ class acessoFtp extends \CI_Controller
     */
         }
 
+    public function registro(){
+        $this->load->view('registro');
+    }
 }
 

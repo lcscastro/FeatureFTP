@@ -12,7 +12,6 @@ class acessoFtp extends \CI_Controller
     public function _construct()
     {
         parent::__construct();
-        $this->conectar();
     }
 
     public function index()
@@ -39,21 +38,24 @@ class acessoFtp extends \CI_Controller
 
     public function lista(){
         //Mandar Arquivo remoto da lista para função baixar
-        $this->load->view('lista');
+        $this->conectar();
 
-//        $pasta_remoto = './httpdocs/hidro';
+
+        $pasta_remoto = './httpdocs/hidro';
 //        echo " Lista de Arquivos:";
-//        $list = $this->ftp->list_files($pasta_remoto);
-//
-//        foreach ($list as $file)
-//        {
-//            echo "<br>$file";
-//        }
-//        $this->ftp->close();
+        $list = $this->ftp->list_files($pasta_remoto);
+
+        foreach ($list as $file)
+        {
+            echo "<br>$file";
+        }
+        $this->load->view('lista',$list);
+
     }
 
     public function baixar(){
         //Trazer Arquivo Remoto pela lista de arquivos
+        $this->conectar();
         $arquivo_remoto =  './httpdocs/hidro/hidro.png'; // Pasta (externa)
         $arquivo_local = './assets/teste.png';
 

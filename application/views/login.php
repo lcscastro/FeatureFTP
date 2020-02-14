@@ -36,7 +36,7 @@
   <div class="login-box-body">
     <p class="login-box-msg">Faça o login para acessar seus relatorios</p>
 
-    <form action="" method="post">
+    <form action="lista" method="post"> <!-- Fazer Login e ir para lista -->
       <div class="form-group has-feedback">
         <input type="text" class="form-control" placeholder="Digite seu codigo de acesso">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
@@ -47,7 +47,7 @@
 <!--        <span class="glyphicon glyphicon-lock form-control-feedback"></span>-->
 <!--      </div>-->
 
-      <div class="row">
+      <div class="row" style="margin-bottom: 10px">
 
 <!--        <div class="col-xs-8">-->
 <!--          <div class="checkbox icheck">-->
@@ -58,14 +58,16 @@
 <!--        </div>-->
 
         <!-- /.col -->
-        <div class="login col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+        <div class="login col-12" style="padding-left: 40%">
+          <button type="submit" class="btn btn-primary">Sign In</button>
         </div>
         <!-- /.col -->
       </div>
     </form>
+        <div class="login col-12" style="padding-left: 100px;padding-right: 100px;">
+            <a href="registro" class="btn btn-primary btn-google" > Primeiro Acesso </a>
+        </div>
 
-      <a href="<?php base_url('registro')?>" class="btn btn-block btn-social btn-facebook btn-flat"> Primeiro Acesso </a>
 <!--    <div class="social-auth-links text-center">-->
 <!--      <p>- OR -</p>-->
 <!--      <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign in using-->

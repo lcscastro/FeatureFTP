@@ -2332,6 +2332,12 @@ a:focus {
   font-size: 10px;
   font-weight: 400;
 }
+
+.btn-sign {
+ position: relative;
+ align-items: center;
+ margin-right: auto;
+}
 /*
  * Component: Callout
  * ------------------
@@ -3377,7 +3383,7 @@ table.text-center th {
 .btn-social {
   position: relative;
   padding-left: 44px;
-  text-align: left;
+  text-align: center;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -3420,7 +3426,7 @@ table.text-center th {
 .btn-social-icon {
   position: relative;
   padding-left: 44px;
-  text-align: left;
+  text-align: center;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

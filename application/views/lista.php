@@ -30,6 +30,7 @@
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
+
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
@@ -37,26 +38,25 @@
     <!-- Logo -->
     <a href="#" class="logo">
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Admin</b>LTE</span>
+      <span class="logo-lg"><b>Hidro</b>Medi</span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
-
       <div class="navbar-custom-menu">
-
 
       </div>
     </nav>
   </header>
   <!-- Left side column. contains the logo and sidebar -->
+    <!-- Content Wrapper. Contains page content -->
 
     <!-- Main content -->
-    <section class="content">
-      <div class="row">
-        <div class="col-xs-12">
+    <section class="content" style=" height: 630px;">
+      <div class="row" style="  margin-left: 200px;  margin-right: 0px;">
+        <div class="col-xs-10">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Relatorio</h3>
+              <h3 class="box-title">Relatório</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -64,37 +64,39 @@
 
                   <thead>
                   <tr>
-                      <th>N°</th>
+                      <th style="width: 50px;">N°</th>
                       <th>Nome</th>
-                      <th> </th>
+                      <th style="width: 100px; height: 20px;"></th>
                   </tr>
                   </thead>
                   <tbody>
 
                 <tr>
-                  <td> </td>
-                  <td></td>
-                    <td><a class="btn btn-primary" href="#"></a></td>
-
+                    <td> 1</td>
+                    <td> Teste</a></td>
+                    <td style=" width: 100px; height: 20px;"><a href="download" class="btn btn-success" style="width: 86px;height: 34px;"> BAIXAR</a></td>
                 </tr>
-
 
                 </tbody>
 
               </table>
+                <a href="http://hidromedi.com.br/" class="btn btn-default" style="width: 86px;height: 34px;"> Voltar</a></td>
             </div>
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
+        </div>
+
         <!-- /.col -->
       </div>
       <!-- /.row -->
+
     </section>
     <!-- /.content -->
 </div>
 
-</div>
-  </div>
+
+
   <!-- /.content-wrapper -->
   <footer class="main-footer">
     <div class="pull-right hidden-xs">

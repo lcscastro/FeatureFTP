@@ -28,28 +28,24 @@ class acessoFtp extends \CI_Controller
         $config['debug'] = TRUE;
         $config['port'] = 21;
 
-        if( $this->ftp->connect($config)){
-            echo "<br />Login no servidor realizado.<br />";
-        }
-        else {
-            echo "<br />Falha no Login.<br />";
-        }
+//        if( $this->ftp->connect($config)){
+//            echo "<br />Login no servidor realizado.<br />";
+//        }
+//        else {
+//            echo "<br />Falha no Login.<br />";
+//        }
     }
 
     public function lista(){
         //Mandar Arquivo remoto da lista para função baixar
         $this->conectar();
 
-
         $pasta_remoto = './httpdocs/hidro';
-//        echo " Lista de Arquivos:";
-        $list = $this->ftp->list_files($pasta_remoto);
 
-        foreach ($list as $file)
-        {
-            echo "<br>$file";
-        }
-        $this->load->view('lista',$list);
+        $lista = $this->ftp->list_files($pasta_remoto);
+
+        $this->load->view('lista');
+
 
     }
 
@@ -57,7 +53,7 @@ class acessoFtp extends \CI_Controller
         //Trazer Arquivo Remoto pela lista de arquivos
         $this->conectar();
         $arquivo_remoto =  './httpdocs/hidro/hidro.png'; // Pasta (externa)
-        $arquivo_local = './assets/teste.png';
+        $arquivo_local = './assets/teste.png'; //Puxar da lista de Arquivos Selecionado
 
         $this->ftp->download($arquivo_remoto, $arquivo_local, 'auto');
         //Força Download - Arquivo Dentro do Servidor Local

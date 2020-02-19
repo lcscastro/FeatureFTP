@@ -7,7 +7,7 @@
  * Lucas Castro
  */
 
-class acessoFtp extends \CI_Controller
+class AcessoFtp extends \CI_Controller
 {
     public function _construct()
     {
@@ -27,7 +27,7 @@ class acessoFtp extends \CI_Controller
         $config['passive']  = TRUE;
         $config['debug'] = TRUE;
         $config['port'] = 21;
-
+        $this->ftp->connect($config);
 //        if( $this->ftp->connect($config)){
 //            echo "<br />Login no servidor realizado.<br />";
 //        }
@@ -37,43 +37,34 @@ class acessoFtp extends \CI_Controller
     }
 
     public function lista(){
-        //Mandar Arquivo remoto da lista para função baixar
+
         $this->conectar();
-
         $pasta_remoto = './httpdocs/hidro';
-
-        $lista = $this->ftp->list_files($pasta_remoto);
-
-        $this->load->view('lista');
-
+        $lista = $this->ftp->list_files($pasta_remoto); //Array
+        $arquivos = implode("", $lista); //array 0 - gera espaço em branco
+        $dados['nome'] = explode('./httpdocs/hidro/', $arquivos); //String
+        $dados['lista'] = $this->ftp->list_files($pasta_remoto); //Array
+        $this->load->view('lista',$dados);
+        $this->ftp->close();
 
     }
 
     public function baixar(){
         //Trazer Arquivo Remoto pela lista de arquivos
         $this->conectar();
-        $arquivo_remoto =  './httpdocs/hidro/hidro.png'; // Pasta (externa)
-        $arquivo_local = './assets/teste.png'; //Puxar da lista de Arquivos Selecionado
+        $pasta_remoto = './httpdocs/hidro';
+        $id = $this->input->get("id");
+        $lista = $this->ftp->list_files($pasta_remoto); //Array
 
+        $arquivo_remoto =  $lista[$id]; // Pasta (externa)
+        $arquivo_local = './assets/arquivo.pdf'; //Puxar da lista de Arquivos Selecionado
         $this->ftp->download($arquivo_remoto, $arquivo_local, 'auto');
         //Força Download - Arquivo Dentro do Servidor Local
         force_download($arquivo_local, null);
-        unlink($arquivo_local);
+        unlink($arquivo_local); //apagar arquivo local
         $this->ftp->close();
 
     }
-
-    public function upload(){
-
-/*        Define variáveis para o envio de arquivo
-    $local_arquivo = './arquivos/documento.doc'; // Localização (local)
-    $ftp_pasta = '/public_html/arquivos/'; // Pasta (externa)
-   $ftp_arquivo = 'documento.doc'; // Nome do arquivo (externo)
-
-   Envia o arquivo pelo FTP em modo ASCII
-    $envio = ftp_put($ftp, $ftp_pasta.$ftp_arquivo, $local_arquivo, FTP_ASCII); // Retorno: true / false
-    */
-        }
 
     public function registro(){
         $this->load->view('registro');

@@ -60,7 +60,8 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <table id="example2" class="table table-bordered table-hover">
+
+                    <table id="example2" class="table table-bordered table-hover">
 
                   <thead>
                   <tr>
@@ -71,22 +72,31 @@
                   </thead>
                   <tbody>
 
+                <?php
+                    $i = 0; //Contador para Lista
+                foreach ($lista as $item):
+                    $j = $i;
+                    ?>
+
                 <tr>
-                    <td> 1</td>
-                    <td> Teste</a></td>
-                    <td style=" width: 100px; height: 20px;"><a href="download" class="btn btn-success" style="width: 86px;height: 34px;"> BAIXAR</a></td>
+                    <td> <?= $i++;?></td>
+                    <td> <?= $nome[$i]; ?></td>
+                    <td> <a href=<?='download/?id='.$j?>> <button type="button" class="btn btn-success">BAIXAR</button></a></td>
                 </tr>
+
+                <?php $j++;
+                endforeach; ?>
 
                 </tbody>
 
               </table>
-                <a href="http://hidromedi.com.br/" class="btn btn-default" style="width: 86px;height: 34px;"> Voltar</a></td>
+                <a href="http://hidromedi.com.br" class="btn btn-default" style="width: 86px;height: 34px;"> Voltar</a></td>
+
             </div>
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
         </div>
-
         <!-- /.col -->
       </div>
       <!-- /.row -->
@@ -94,8 +104,6 @@
     </section>
     <!-- /.content -->
 </div>
-
-
 
   <!-- /.content-wrapper -->
   <footer class="main-footer">
@@ -105,8 +113,6 @@
     <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
     reserved.
   </footer>
-
-
 
 <!-- jQuery 3 -->
 <script src="<?php echo base_url()?>../../theme/bower_components/jquery/dist/jquery.min.js"></script>

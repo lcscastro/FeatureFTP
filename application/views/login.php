@@ -39,7 +39,7 @@
     <form action="lista" method="post"> <!-- Fazer Login e ir para lista -->
       <div class="form-group has-feedback">
         <input type="text" class="form-control" placeholder="Digite seu codigo de acesso">
-        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+        <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
 
 <!--      <div class="form-group has-feedback">-->
